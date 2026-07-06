@@ -1,0 +1,55 @@
+# 30 — 品質ゲート
+
+## ゲート順序（前段が通らなければ次段へ進めない）
+
+1. テスト（Docker 内で全件緑、実行ログあり）
+2. Lint / 静的解析 / 型チェック
+3. 依存監査（backend_profile の「依存監査コマンド」を実行）
+4. 契約突合（feature-contract の API 契約・受け入れ条件と実装の一致）
+5. CI（緑を確認、証跡化）
+6. セキュリティ（SecurityReviewer + デプロイ前は pre-deploy-security-check）
+7. DoD（done-definition の全項目）
+
+各ゲートの未通過は次工程を禁止する。推測での通過は不可（証跡がない項目は unknown）。
+
+## 3 値判定と unknown 昇格
+
+- 項目の状態は `pass` / `fail` / `unknown` で記録する。
+- 証跡ファイルパスが空の項目は自動的に `unknown` とする。
+- `unknown` が 1 つでもあれば、リリース判定は completed / deployable にできず `blocked`。
+- `fail` が 1 つでもあれば `rejected` または `blocked`。
+
+## 証跡ディレクトリ規約（固定）
+
+すべての証跡は `harness/evidence/<feature-id>/` 配下に固定パスで保存する。
+
+```
+harness/evidence/<feature-id>/
+├── red.log
+├── green.log
+├── test.log
+├── lint.log
+├── typecheck.log
+├── dependency-audit.log
+├── ci-status.md
+├── evaluator-report.md
+├── security-report.md
+├── pre-deploy-security-check.md
+├── final-operation-check.md
+└── release-decision.md
+```
+
+`release-decision.md` が存在しない限り completed は禁止（`rules/70-completed-policy.md` と対）。
+
+複数 feature を束ねてデプロイする場合は `harness/evidence/release/<release-id>/` に
+ci-status / final-operation-check / release-decision を置き、構成 feature の evidence
+ディレクトリを release-decision.md 内で列挙参照する。
+
+## CI 確認方針
+
+- 原則 CI 緑の証跡を `ci-status.md` に保存する（`gh run` などの結果を記録）。
+- Claude Code 環境で CI 確認ができない場合は、ローカルのフルテストログ + 人間の CI 確認を
+  証跡として `ci-status.md` に記録する。
+- CI 未確認のまま completed / deployable は禁止。
+- GitHub Actions の最小テストジョブ例は `docs/04_quality_gate.md` と各 backend profile の
+ 「CIテストジョブ例」見出しにある。

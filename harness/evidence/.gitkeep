@@ -1,0 +1,2 @@
+# 証跡ディレクトリ。feature ごとに harness/evidence/<feature-id>/ が作られる。
+# 規約は .claude/rules/30-quality-gate.md と .claude/rules/70-completed-policy.md を参照。
