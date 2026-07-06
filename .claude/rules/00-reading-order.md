@@ -10,6 +10,8 @@
 ## 未選択 profile 読込禁止
 
 - `.claude/profiles/` 配下は、active-profile.md に列挙されたパスだけを Read / Grep してよい。
+- Read / Grep / Bash 経由を問わず、`.claude/active-profile.md` に列挙されていない
+  `.claude/profiles/` 配下の profile を読んではならない。
 - 列挙されていない profile を読むこと・内容を実装や会話に反映することを禁止する。
 - この禁止は PreToolUse hook（`.claude/hooks/guard-active-profile-read.js`）でも強制される。
   hook はディレクトリ指定の Grep（未選択 profile へ波及する）も拒否する。
