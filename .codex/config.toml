@@ -1,0 +1,15 @@
+# .codex/config.toml — Codex 用リポジトリ固有設定（最小構成）
+#
+# 主指示はリポジトリルートの AGENTS.md で管理する。
+# 具体的な開発ルールは以下を参照する（Claude Code / Codex 共通資産）:
+#   - .claude/rules/            共通ルール（読み込み順・TDD・品質ゲート・completed 規約）
+#   - .claude/active-profile.md 有効な技術構成（ここに列挙された profile だけ読む）
+#   - .claude/project-profile.md プロジェクト固有情報の唯一の置き場
+#
+# hook:
+#   未選択 profile の読込ガードには .codex/hooks/guard-active-profile-read.js を使う。
+#   Codex の hook 設定形式はバージョンにより異なるため、ここでは壊れる可能性のある
+#   設定キーを推測で書かない。有効化手順は .codex/README.md を参照
+#   （Codex 側で /hooks から trust・有効化する）。
+#   単体検証: `node .codex/hooks/guard-active-profile-read.js <path>`
+#   （exit 0 = allow / exit 2 = deny）

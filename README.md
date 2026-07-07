@@ -32,6 +32,17 @@ SecurityReviewer → ReleaseJudge の開発フローを固定します。
 5. docker compose 構成を確認（無ければ最初の契約として作成）。
 6. Claude Code に「有効な profile 構成を報告せよ」と聞き、未選択 profile が混ざらないことを確認。
 
+## Codex 対応
+
+このハーネスは Claude Code と Codex の両方で使えます。
+
+- **Codex の主指示**: リポジトリルートの `AGENTS.md`。
+- **Codex 用 skills**: `.agents/skills/`（`.claude/skills/` と同等の 11 skill）。
+- **Codex 用設定**: `.codex/`（`config.toml` / hook / 有効化手順は `.codex/README.md`）。
+- `.claude/active-profile.md`・`.claude/project-profile.md`・`.claude/rules/`・
+  `.claude/profiles/`・`harness/contracts/`・`harness/evidence/` は
+  **Claude Code / Codex の共通資産**であり、どちらのツールでも同じものを使います。
+
 ## docs 索引
 
 - `docs/00_concept.md` — 思想と前提・制約

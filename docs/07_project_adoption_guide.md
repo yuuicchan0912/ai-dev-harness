@@ -30,6 +30,36 @@
    凍結契約は `harness/contracts/<feature-id>.md`、実行証跡は
    `harness/evidence/<feature-id>/` に置く（`rules/30`）。
 
+## Codex を使う場合
+
+- コピー対象に `AGENTS.md`（Codex 主指示）と `.agents/skills/`（Codex 用 skills）、
+  `.codex/`（Codex 設定・hook）も含める。
+- **既存プロジェクトに既に `AGENTS.md` がある場合は上書きせず**、既存の指示と
+  本ハーネスの規約（未選択 profile 読込禁止・証跡ベース判定・Docker 必須）をマージする。
+- Codex hook の有効化には Codex 側の hooks 設定と trust 確認が必要（`.codex/README.md`）。
+- `.claude/active-profile.md` / `.claude/project-profile.md` / `.claude/rules/` /
+  `.claude/profiles/` は Claude Code / Codex 共通資産なので二重管理しない。
+
+### skills の同期規約（正本: `.claude/skills/`）
+
+- Codex 用 skills は `.agents/skills/` に置く。`.agents/skills/` は `.claude/skills/` の
+  **複製**として扱い、正本は `.claude/skills/` とする。
+- `.claude/skills/` を変更した場合は、必ず `.agents/skills/` へ同内容を反映する。
+  `.agents/skills/` を変更した場合も、必ず `.claude/skills/` へ同内容を反映する。
+- 適用前またはコミット前に、以下で同期確認する。差分がある場合は、意図した差分でない限り
+  コミットしない。
+
+  ```bash
+  diff -r .claude/skills .agents/skills
+  ```
+
+### hook の同期規約
+
+- `.claude/hooks/guard-active-profile-read.js` と
+  `.codex/hooks/guard-active-profile-read.js` は同じ allowlist 抽出思想で維持する。
+- hook を変更した場合は両方の hook の挙動差分を確認する。少なくとも
+  **`*_profile:` 行だけを allowlist 抽出対象にする**仕様が両方で守られていることを確認する。
+
 ## 既存 `.claude/` とのマージ
 
 既存プロジェクトにすでに `.claude/` や `CLAUDE.md` がある場合の安全な適用順序:
