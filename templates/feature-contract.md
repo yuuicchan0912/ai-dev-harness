@@ -1,6 +1,6 @@
 # feature-contract（雛形）
 
-- feature-id: {{id}}
+- feature-id: {{id}}（短い kebab-case の機能名。例: `login-form`、`profile-edit`、`csv-export`）
 - 凍結日: {{日付}} / 状態: draft → frozen
 
 ## 背景

@@ -28,7 +28,9 @@ Gemini CLI 向けの共通開発ハーネスです。ハーネス設計・ルー
 1. `CLAUDE.md` `.claude/` `templates/` `docs/` `harness/` を対象リポジトリへコピーする
    （既存 `.claude/` や `CLAUDE.md` がある場合は上書きせずマージ。
    `docs/07_project_adoption_guide.md` 参照）。
-2. `templates/active-profile.md` を `.claude/active-profile.md` に置き、5 つのポインタを選ぶ。
+2. `templates/active-profile.md` を `.claude/active-profile.md` に置き、5 つのポインタを選ぶ
+   （雛形のデフォルトは `django + aws`。異なるスタックでは該当する `*_profile:` 行を
+   書き換え、`docs/08` の互換マトリクスを確認する）。
 3. `templates/project-profile.md` を `.claude/project-profile.md` にコピーして固有情報を記入。
 4. `docs/08_profile_switching.md` の互換マトリクスで backend×infra が supported か確認する。
 5. docker compose 構成を確認（無ければ最初の契約として作成）。

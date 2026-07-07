@@ -13,6 +13,8 @@
    上書きしない**（下記「既存 `.claude/` とのマージ」に従う）。
 2. **active-profile 選択**: `templates/active-profile.md` を `.claude/active-profile.md` に置き、
    frontend / backend / infra / docker / testing の 5 ポインタを 1 つずつ選ぶ。
+   **雛形のデフォルト構成は `django + aws`**。異なるスタック（例: Node.js + Vercel+Supabase）で
+   使う場合は該当する `*_profile:` 行を書き換え、切替後に `docs/08` の互換マトリクスを確認する。
 3. **project-profile 記入**: `templates/project-profile.md` を `.claude/project-profile.md` に
    コピーし、プロダクト概要・ドメイン用語・環境変数名・リポジトリ規約を記入する。
 4. **互換確認**: `docs/08_profile_switching.md` の互換マトリクスで backend×infra が supported か
@@ -24,11 +26,26 @@
    CI 確認ができない環境では、ローカルのフルテストログ + 人間の CI 確認を代替証跡にできる。
    **CI 未確認のまま completed / deployable にしてはいけない**（`rules/30`）。
 7. **hook 有効化確認**: `.claude/settings.json` の PreToolUse hook が読み込まれることを確認する。
-8. **スモーク**: Claude Code に「有効な profile 構成を報告せよ」と聞き、未選択 profile が
-   混ざらないこと、hook が未選択 profile の Read をブロックすることを確認する。
+8. **スモーク**: Claude Code / Codex では「有効な profile 構成を報告せよ」と聞き、未選択
+   profile が混ざらないこと、hook が未選択 profile の Read をブロックすることを確認する。
+   Copilot / Gemini CLI など hook のない系統では、各ツールの主指示を読ませたうえで
+   「有効な profile 構成を報告せよ」と依頼し、未選択 profile に言及しないことを確認する
+   （機械的な読込防止 hook がないため、行動規約ベースの確認になる）。
 9. **運用開始**: sprint-contract を作成し、feature 単位で Planner から回す。
    凍結契約は `harness/contracts/<feature-id>.md`、実行証跡は
    `harness/evidence/<feature-id>/` に置く（`rules/30`）。
+
+### ツール別の最初の実行例
+
+最初の feature 開発は、Planner に feature-contract を作成させるところから始める。
+
+- **Claude Code**: `/plan-feature` を実行し、「この要件で feature-contract を作って」と依頼する。
+- **Codex**: `.agents/skills/plan-feature/SKILL.md` の手順に従い、「この要件で
+  feature-contract を作って」と依頼する。
+- **GitHub Copilot**: `.github/prompts/plan-feature.prompt.md` をプロンプトとして実行する。
+- **Gemini CLI**: `/plan-feature` カスタムコマンドを実行する。
+
+作成された feature-contract は `harness/contracts/<feature-id>.md` へ保存する。
 
 ## Codex を使う場合
 

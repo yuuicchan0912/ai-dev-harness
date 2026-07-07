@@ -48,6 +48,9 @@ ci-status / final-operation-check / release-decision を置き、構成 feature 
 ## 契約の保存先と役割分担
 
 - 凍結済み feature-contract は `harness/contracts/<feature-id>.md` に保存する。
+- feature-id は短い kebab-case の機能名にする（例: `login-form`、`profile-edit`、`csv-export`）。
+- sprint-contract は `harness/contracts/sprint-<id>.md` に保存する
+  （feature-contract の `harness/contracts/<feature-id>.md` とは区別する）。
 - 役割分担: `harness/contracts/<feature-id>.md` は**凍結契約**（仕様・API契約・テスト観点表・
   受け入れ条件）、`harness/evidence/<feature-id>/` は**実行証跡**（テストログ・レポート・判定）。
 - 契約変更は Planner 経由でのみ行い、変更履歴を契約ファイル内に記録する（`rules/20`）。
