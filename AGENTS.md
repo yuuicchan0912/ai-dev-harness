@@ -1,6 +1,7 @@
 # AGENTS.md — Codex 用主指示（共通開発ハーネス）
 
-このリポジトリは **Codex と Claude Code の両方で使える共通開発ハーネス**です。
+このリポジトリは **複数の AI コーディングツール（Claude Code / Codex / GitHub Copilot /
+Gemini CLI）で使える共通開発ハーネス**です。
 以下の規約は Codex で作業するときの最優先指示です。詳細規約は `.claude/rules/` にあり、
 本ファイルと矛盾しません（共通資産）。
 

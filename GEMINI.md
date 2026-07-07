@@ -1,7 +1,8 @@
 # GEMINI.md — Gemini CLI 用主指示（共通開発ハーネス）
 
-このリポジトリは **Claude Code / Codex / GitHub Copilot / Gemini CLI の 4 ツールで使える
-共通開発ハーネス**です。Gemini CLI で作業するときは以下を最優先で守ってください。詳細規約は
+このリポジトリは **複数の AI コーディングツール（Claude Code / Codex / GitHub Copilot /
+Gemini CLI）で使える共通開発ハーネス**です。Gemini CLI で作業するときは以下を
+最優先で守ってください。詳細規約は
 `CLAUDE.md`・`AGENTS.md`・`.github/copilot-instructions.md`・`.claude/rules/` にあり、
 本ファイルと矛盾しません（共通資産）。
 
@@ -50,7 +51,8 @@
 
 ## 6. Gemini CLI 用コマンド
 
-- 手動実行できるカスタムコマンドは `.gemini/commands/`（`.claude/skills/` を正本とする複製系）。
+- 手動実行できるカスタムコマンドは `.gemini/commands/`（`.claude/skills/` を正本として
+  同期する。逐語の複製ではなく同じ目的・手順を保つ）。
 - コマンドは技術固有コマンドを直接書かず、選択中 profile の固定見出しを参照する。
 
 ## 参照先

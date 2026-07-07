@@ -80,7 +80,7 @@
 - Copilot 用ファイルを変更した場合は、`CLAUDE.md` / `AGENTS.md` / `.claude/rules/` との
   整合を確認する。
 
-### 3 系統の同期規約（Claude Code / Codex / Copilot）
+### 系統間の同期規約（Claude Code / Codex / Copilot）
 
 `.github/` は正本を持たず、共通資産を参照する入口。以下を必ず一致させる。
 
@@ -110,7 +110,7 @@
 - Gemini CLI 用ファイルを変更した場合は、`CLAUDE.md` / `AGENTS.md` /
   `.github/copilot-instructions.md` / `.claude/rules/` との整合を確認する。
 
-### 4 系統の同期規約に Gemini CLI を追加
+### 系統間の同期規約（Gemini CLI の追加分）
 
 - `GEMINI.md` は `CLAUDE.md` / `AGENTS.md` / `.github/copilot-instructions.md` /
   `.claude/rules/` と矛盾させない。

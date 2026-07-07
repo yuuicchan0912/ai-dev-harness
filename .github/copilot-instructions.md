@@ -1,7 +1,8 @@
 # GitHub Copilot 用リポジトリ指示（共通開発ハーネス）
 
-このリポジトリは **Claude Code / Codex / GitHub Copilot の 3 ツールで使える共通開発
-ハーネス**です。GitHub Copilot で作業するときは以下を最優先で守ってください。詳細規約は
+このリポジトリは **複数の AI コーディングツール（Claude Code / Codex / GitHub Copilot /
+Gemini CLI）で使える共通開発ハーネス**です。GitHub Copilot で作業するときは以下を
+最優先で守ってください。詳細規約は
 `CLAUDE.md`・`AGENTS.md`・`.claude/rules/` にあり、本ファイルと矛盾しません。
 
 ## 技術構成の読み込み（絶対規約）
