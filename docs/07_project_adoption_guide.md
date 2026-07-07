@@ -91,7 +91,33 @@
 - `.github/agents/` は `.claude/agents/` と職掌分離（generator だけが実装変更、
   evaluator / security-reviewer / release-judge はコード修正禁止）をズレさせない。
 - **ReleaseJudge 専権・証跡ベース判定・未選択 profile 読込禁止・Docker 適用範囲**の 4 点は、
-  Claude Code / Codex / Copilot の 3 系統で必ず一致させる。
+  Claude Code / Codex / Copilot / Gemini CLI の全系統で必ず一致させる。
+
+## Gemini CLI を使う場合
+
+- コピー対象に `GEMINI.md`（主指示）と `.gemini/`（`settings.json` / `README.md` /
+  `commands/`）を含める。
+- **既存 `GEMINI.md` がある場合は上書きせずマージ**する。
+- 既存の `.gemini/settings.json` / `.gemini/commands/` がある場合は、同名ファイルの差分を
+  確認してから統合する。
+- Gemini CLI 利用時も `.claude/active-profile.md` を有効構成の**正**とし、未選択 profile を
+  読まない（Read / Grep / Bash / @ 参照を問わず）。
+- **Gemini CLI にはこの構成では読込ガード hook を同梱しない**（Claude Code / Codex は hook を
+  持つ）。未選択 profile 読込禁止は `GEMINI.md` と `.claude/rules/00-reading-order.md` の
+  行動規約だけで担保されるため、防御レベルが低いことを認識して運用する。
+- `.gemini/settings.json` は推測キーで壊さないため現状 `{}`。設定追加は Gemini CLI の
+  `/settings` または公式ドキュメントに従う（説明は `.gemini/README.md`）。
+- Gemini CLI 用ファイルを変更した場合は、`CLAUDE.md` / `AGENTS.md` /
+  `.github/copilot-instructions.md` / `.claude/rules/` との整合を確認する。
+
+### 4 系統の同期規約に Gemini CLI を追加
+
+- `GEMINI.md` は `CLAUDE.md` / `AGENTS.md` / `.github/copilot-instructions.md` /
+  `.claude/rules/` と矛盾させない。
+- `.gemini/commands/` は `.claude/skills/`（正本）・`.agents/skills/`・`.github/prompts/` と
+  目的・手順をズレさせない。
+- Gemini CLI の sub-agents は preview 扱いのため、初期版では `.gemini/agents/` を作らない。
+  ロールの職掌分離は `.claude/agents/`・`.github/agents/` を正として参照する。
 
 ## 既存 `.claude/` とのマージ
 
