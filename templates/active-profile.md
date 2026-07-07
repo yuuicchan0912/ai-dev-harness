@@ -6,7 +6,7 @@
 
 ```yaml
 frontend_profile: .claude/profiles/frontend/nextjs.md
-backend_profile: .claude/profiles/backend/node.md
+backend_profile: .claude/profiles/backend/django.md
 infra_profile: .claude/profiles/infra/vercel-supabase.md
 docker_profile: .claude/profiles/docker/docker-required.md
 testing_profile: .claude/profiles/testing/tdd-required.md
