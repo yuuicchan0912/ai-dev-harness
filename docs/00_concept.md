@@ -8,7 +8,8 @@
 
 ## 3 層分離
 
-- **共通層**: `.claude/CLAUDE.md` と `.claude/rules/`。どの技術構成でも変わらない方針。
+- **共通層**: ルート直下の `CLAUDE.md`（Claude Code 主指示）と `.claude/rules/`。
+  どの技術構成でも変わらない方針。Codex の主指示はルート直下の `AGENTS.md`。
 - **選択層**: `.claude/profiles/`。技術選択ごとのルール。active-profile が指す 1 ファイルだけ有効。
 - **プロジェクト層**: `.claude/project-profile.md`。固有情報の唯一の置き場。
 

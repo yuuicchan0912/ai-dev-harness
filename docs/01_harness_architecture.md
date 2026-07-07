@@ -2,16 +2,18 @@
 
 ## 読み込み順序
 
-1. `.claude/CLAUDE.md`
+1. `CLAUDE.md`（リポジトリルート。Claude Code の主指示）
 2. `.claude/active-profile.md`
-3. active-profile.md が指す profile だけ（frontend / backend / infra / docker / testing）
-4. `.claude/project-profile.md`
+3. `.claude/project-profile.md`
+4. `.claude/rules/`
+5. `.claude/active-profile.md` で指定された profile のみ（frontend / backend / infra / docker / testing）
 
 `rules/00-reading-order.md` が正本。未選択 profile の読込は PreToolUse hook で禁止。
 
 ## 各層の責務
 
-- **CLAUDE.md**: 最優先の共通方針（読み込み順・フロー・TDD・Docker・completed 権限）。
+- **CLAUDE.md（リポジトリルート）**: Claude Code の主指示。最優先の共通方針
+  （読み込み順・フロー・TDD・Docker・completed 権限）。Codex の主指示は `AGENTS.md`（並列の入口）。
 - **rules/**: 技術非依存の共通ルール（番号順に 00〜70）。
 - **profiles/**: 技術選択別ルール。固定見出しで揃え、skill が見出し名で参照できるようにする。
 - **agents/**: Planner / Generator / Evaluator / SecurityReviewer / ReleaseJudge の subagent 定義。

@@ -8,9 +8,9 @@
 
 ## 手順
 
-1. **コピー**: `.claude/` `templates/` `docs/` `harness/` を対象リポジトリのルートへコピーする。
-   **既存 `.claude/` がある場合は無条件コピーで上書きしない**（下記「既存 `.claude/` との
-   マージ」に従う）。
+1. **コピー**: `CLAUDE.md` `.claude/` `templates/` `docs/` `harness/` を対象リポジトリの
+   ルートへコピーする。**既存 `.claude/` や `CLAUDE.md` がある場合は無条件コピーで
+   上書きしない**（下記「既存 `.claude/` とのマージ」に従う）。
 2. **active-profile 選択**: `templates/active-profile.md` を `.claude/active-profile.md` に置き、
    frontend / backend / infra / docker / testing の 5 ポインタを 1 つずつ選ぶ。
 3. **project-profile 記入**: `templates/project-profile.md` を `.claude/project-profile.md` に
@@ -68,8 +68,11 @@ active-profile / project-profile を記入**。
 
 - 既存の `.claude/settings.json` がある場合は上書きせず、本ハーネスの hooks 設定
   （PreToolUse の Read|Grep エントリ）を既存の hooks 節へマージする。
-- 既存の `.claude/CLAUDE.md` またはルート直下 `CLAUDE.md` がある場合は、既存方針と
-  ハーネス方針を読み比べて統合する（両方が読み込まれるため、矛盾を残さない）。
+- 既存のルート直下 `CLAUDE.md` がある場合は上書きせず、既存方針とハーネス方針を
+  読み比べて統合する。
+- 既存の `.claude/CLAUDE.md` がある場合は、**ルート直下 `CLAUDE.md` を正**として内容を
+  統合し、`.claude/CLAUDE.md` は削除して重複させない（両方に実体を残すと二重に
+  読み込まれ、矛盾の温床になる）。
 - 既存 hooks がある場合は、hook の実行順序と責務を確認する。
 - 既存 `.claude/agents/` や `.claude/skills/` がある場合は、同名ファイルの上書き前に
   差分確認する。

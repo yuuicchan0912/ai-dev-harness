@@ -1,0 +1,6 @@
+# このハーネスでは CLAUDE.md は配布物（Claude Code の主指示）。
+# グローバル gitignore で CLAUDE.md が除外されている環境でも追跡できるよう再包含する。
+!CLAUDE.md
+
+# ローカル個人設定はコミットしない
+.claude/settings.local.json

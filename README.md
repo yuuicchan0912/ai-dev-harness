@@ -24,8 +24,9 @@ SecurityReviewer → ReleaseJudge の開発フローを固定します。
 
 ## クイックスタート
 
-1. `.claude/` `templates/` `docs/` `harness/` を対象リポジトリへコピーする
-   （既存 `.claude/` がある場合は上書きせずマージ。`docs/07_project_adoption_guide.md` 参照）。
+1. `CLAUDE.md` `.claude/` `templates/` `docs/` `harness/` を対象リポジトリへコピーする
+   （既存 `.claude/` や `CLAUDE.md` がある場合は上書きせずマージ。
+   `docs/07_project_adoption_guide.md` 参照）。
 2. `templates/active-profile.md` を `.claude/active-profile.md` に置き、5 つのポインタを選ぶ。
 3. `templates/project-profile.md` を `.claude/project-profile.md` にコピーして固有情報を記入。
 4. `docs/08_profile_switching.md` の互換マトリクスで backend×infra が supported か確認する。
@@ -34,8 +35,11 @@ SecurityReviewer → ReleaseJudge の開発フローを固定します。
 
 ## Codex 対応
 
-このハーネスは Claude Code と Codex の両方で使えます。
+このハーネスは Claude Code と Codex の両方で使えます。主指示は入口として並列です:
+**Claude Code = ルートの `CLAUDE.md` / Codex = ルートの `AGENTS.md`**。
 
+- **Claude Code の主指示**: リポジトリルートの `CLAUDE.md`
+  （設定・rules・profiles・agents・skills は `.claude/`）。
 - **Codex の主指示**: リポジトリルートの `AGENTS.md`。
 - **Codex 用 skills**: `.agents/skills/`（`.claude/skills/` と同等の 11 skill）。
 - **Codex 用設定**: `.codex/`（`config.toml` / hook / 有効化手順は `.codex/README.md`）。

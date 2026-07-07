@@ -2,10 +2,11 @@
 
 ## 読み込み順序
 
-1. `.claude/CLAUDE.md`
+1. `CLAUDE.md`（リポジトリルート。Claude Code の主指示）
 2. `.claude/active-profile.md`
-3. active-profile.md が指す profile だけ
-4. `.claude/project-profile.md`
+3. `.claude/project-profile.md`
+4. `.claude/rules/`
+5. `.claude/active-profile.md` で指定された profile のみ
 
 ## 未選択 profile 読込禁止
 
