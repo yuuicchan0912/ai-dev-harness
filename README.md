@@ -16,9 +16,16 @@ SecurityReviewer → ReleaseJudge の開発フローを固定します。
 - **証跡ベース判定**: completed / deployable は ReleaseJudge のみが、証跡が揃ったときだけ判定。
 - **デプロイ前チェック**: pre-deploy-security-check と final-operation-check を必須化。
 
+## 前提
+
+- **ホストに Node.js が必要**（PreToolUse hook `guard-active-profile-read.js` の実行用）。
+  Node.js が無い環境では hook が動作せず、未選択 profile の読込ブロックが無効化される。
+  アプリの開発・テスト・CI テストジョブは引き続き Docker 前提（ホストの言語ランタイム不要）。
+
 ## クイックスタート
 
-1. `.claude/` `templates/` `docs/` `harness/` を対象リポジトリへコピーする。
+1. `.claude/` `templates/` `docs/` `harness/` を対象リポジトリへコピーする
+   （既存 `.claude/` がある場合は上書きせずマージ。`docs/07_project_adoption_guide.md` 参照）。
 2. `templates/active-profile.md` を `.claude/active-profile.md` に置き、5 つのポインタを選ぶ。
 3. `templates/project-profile.md` を `.claude/project-profile.md` にコピーして固有情報を記入。
 4. `docs/08_profile_switching.md` の互換マトリクスで backend×infra が supported か確認する。

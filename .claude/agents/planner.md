@@ -30,5 +30,6 @@ model: opus
 - 未選択 profile を読むこと（active-profile.md の指すものだけ）。
 
 ## 出力
-- feature-contract 本文（メインエージェントが所定パスへ保存）。
+- feature-contract 本文（メインエージェントが `harness/contracts/<feature-id>.md` へ保存。
+  `rules/30` の契約保存規約に従う）。
 - 互換 invalid / 仕様不明のときは blocked 理由と必要な人間判断。

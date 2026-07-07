@@ -45,6 +45,21 @@ harness/evidence/<feature-id>/
 ci-status / final-operation-check / release-decision を置き、構成 feature の evidence
 ディレクトリを release-decision.md 内で列挙参照する。
 
+## 契約の保存先と役割分担
+
+- 凍結済み feature-contract は `harness/contracts/<feature-id>.md` に保存する。
+- 役割分担: `harness/contracts/<feature-id>.md` は**凍結契約**（仕様・API契約・テスト観点表・
+  受け入れ条件）、`harness/evidence/<feature-id>/` は**実行証跡**（テストログ・レポート・判定）。
+- 契約変更は Planner 経由でのみ行い、変更履歴を契約ファイル内に記録する（`rules/20`）。
+
+## 証跡のコミット方針
+
+- `harness/evidence/<feature-id>/` はレビュー・監査用の証跡として**原則コミット対象**とする。
+- 既存 `.gitignore` で `*.log` が除外されている場合は、必要に応じて
+  `!harness/evidence/**/*.log` の例外設定を検討する。
+- ただし、証跡ログに secret・個人情報・アクセストークン・接続文字列などが含まれる場合は、
+  必ずマスクしてから保存する。**secret を含むログのコミットは禁止。**
+
 ## CI 確認方針
 
 - 原則 CI 緑の証跡を `ci-status.md` に保存する（`gh run` などの結果を記録）。

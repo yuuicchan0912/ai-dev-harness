@@ -38,6 +38,10 @@ backend×infra 互換は `docs/08_profile_switching.md` のマトリクスに従
 
 - Supabase Postgres を使用。行レベルセキュリティ（RLS）を有効化し、テーブルごとにポリシーを定義。
 - ストレージのバケット公開設定を明示的に管理する。
+- ローカル開発では `supabase start` が内部的に Docker コンテナ群（DB 含む）を起動する。
+  この場合、通常の docker compose 内に `db` サービスを別途持たない構成も許可する。
+- compose の `db` サービスを使うか、Supabase CLI のローカル DB を使うかは
+  `.claude/project-profile.md` に明記し、**二重に DB を起動して接続先が曖昧にならない**ようにする。
 
 ## CI/CD連携
 

@@ -23,7 +23,10 @@ Docker が必須なのは次の 3 つに限定する。
 - 言語ランタイム（python / go / node / php / ruby など）をホストに要求しない。
 - テストや lint をホストで直接叩かない。Evaluator は Docker 外実行を差し戻す。
 - 例外はコンテナ管理外の操作のみ（git 操作、エディタ操作、`docker` / `docker compose` 自体、
-  `gh` による CI 確認）。
+  `gh` による CI 確認、**ハーネス hook 実行用のホスト Node.js**）。
+- ハーネスの PreToolUse hook（`guard-active-profile-read.js`）はホストの Node.js で実行される。
+  これは Docker 必須の例外であり、アプリケーションの開発・テスト・CI テストジョブは
+  引き続き Docker 前提とする。
 
 ## compose が無いプロジェクト
 

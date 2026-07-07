@@ -79,3 +79,12 @@ jobs:
 - 秘密を `NEXT_PUBLIC_` で露出しない。
 - サーバレス前提の構成で、状態をメモリに保持する設計にしない。
 - 生 SQL の文字列連結を禁止（パラメータ化必須）。
+
+## api サービスが無い構成での読み替え
+
+- Node.js + Vercel + Supabase 構成では、API が Next.js Route Handlers に統合される場合がある。
+  その場合、compose に独立した `api` サービスが存在しないことがある。
+- このとき、本 profile の `docker compose exec api ...` はプロジェクト構成に応じて
+  `docker compose exec web ...` へ読み替える。
+- 読み替え内容（どのコマンドをどのサービスで実行するか）は `.claude/project-profile.md` に
+  明記する。
