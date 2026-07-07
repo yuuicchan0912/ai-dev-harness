@@ -69,6 +69,14 @@
   同名ファイルの差分を確認してから統合する。
 - Copilot 利用時も `.claude/active-profile.md` を有効構成の**正**とし、未選択 profile を
   読まない（Read / Grep / Bash 経由を問わず）。
+- **Copilot には読込ガード hook が存在しない**（Claude Code / Codex の hook 相当の機構なし）。
+  未選択 profile 読込禁止は指示（copilot-instructions / instructions）だけで担保されるため、
+  3 系統の中で防御レベルが低いことを認識して運用する。
+- `.github/agents/*.agent.md` の `tools` 名は Copilot のサーフェス（VS Code チャット /
+  coding agent）とバージョンで異なる場合がある。動かないときは利用環境のツール一覧に
+  合わせて調整する（職掌分離 = generator のみ編集可、は維持する）。
+- `.github/instructions/` の `applyTo` は既定で `"**"`（全ファイル適用）。採用先の
+  ディレクトリ構造が確定したら、frontend / backend / infra は対象パスに絞ることを推奨する。
 - Copilot 用ファイルを変更した場合は、`CLAUDE.md` / `AGENTS.md` / `.claude/rules/` との
   整合を確認する。
 
