@@ -1,8 +1,9 @@
-# 共通開発ハーネス（Claude Code 用）
+# 共通開発ハーネス（Claude Code / Codex / GitHub Copilot / Gemini CLI 用）
 
-どの Web 開発プロジェクトにもコピーして使える Claude Code 用の共通開発ハーネスです。
-ハーネス設計・ループエンジニアリング・TDD を標準化し、Planner → Generator → Evaluator →
-SecurityReviewer → ReleaseJudge の開発フローを固定します。
+どの Web 開発プロジェクトにもコピーして使える、Claude Code / Codex / GitHub Copilot /
+Gemini CLI 向けの共通開発ハーネスです。ハーネス設計・ループエンジニアリング・TDD を
+標準化し、Planner → Generator → Evaluator → SecurityReviewer → ReleaseJudge の
+開発フローを固定します。
 
 ## 特徴
 
