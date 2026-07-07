@@ -1,0 +1,35 @@
+---
+mode: agent
+description: 最終動作 Check を証跡ベースで行う
+---
+
+# final-operation-check
+
+## 目的
+デプロイ直前にアプリが実際に動くことを証跡で確認する。チェックリストを 1 項目ずつ機械的に
+消化する。コードは修正しない。
+
+## 入力
+- `<feature-id>`・active-profile の frontend / backend / infra profile
+- 既存証跡（test.log / lint.log / typecheck.log / dependency-audit.log / ci-status.md）
+
+## 実行手順（各項目を pass / fail / unknown で記録し、証跡パスを必ず添える）
+1. Docker 環境でアプリが起動するか（compose 環境。本番ランタイム起動ではない）。
+2. DB migration が成功するか（backend_profile の「Migrationコマンド」）。
+3. backend_profile / frontend_profile の「テストコマンド」が成功するか。
+4. Lint / 静的解析 / 型チェックが成功するか。
+5. backend_profile の「依存監査コマンド」が成功するか。
+6. 主要導線の E2E / スモークが成功するか。
+7. API 契約と実装が一致するか（契約テスト / スキーマ検証の実行ログ。無ければ unknown）。
+8. 環境変数不足で起動失敗しないか。
+9. デプロイ前に必要な CI が緑か（`ci-status.md` を確認）。
+
+## 禁止事項
+- コード修正。推測での PASS（証跡パスが空なら自動 unknown）。deployable 判定。未選択 profile 参照。
+
+## 出力フォーマット
+- チェックリスト（項目 / 状態 / 実行コマンド / 証跡パス）→
+  `harness/evidence/<feature-id>/final-operation-check.md`。
+
+## 参照先
+`.claude/skills/final-operation-check/SKILL.md`（正本）・`.claude/rules/50-docker-baseline.md`。

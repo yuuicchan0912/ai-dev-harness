@@ -60,6 +60,31 @@
 - hook を変更した場合は両方の hook の挙動差分を確認する。少なくとも
   **`*_profile:` 行だけを allowlist 抽出対象にする**仕様が両方で守られていることを確認する。
 
+## GitHub Copilot を使う場合
+
+- コピー対象に `.github/`（`copilot-instructions.md` / `instructions/` / `prompts/` /
+  `agents/`）を含める。
+- **既存 `.github/copilot-instructions.md` がある場合は上書きせずマージ**する。
+- 既存の `.github/instructions/` / `.github/prompts/` / `.github/agents/` がある場合は、
+  同名ファイルの差分を確認してから統合する。
+- Copilot 利用時も `.claude/active-profile.md` を有効構成の**正**とし、未選択 profile を
+  読まない（Read / Grep / Bash 経由を問わず）。
+- Copilot 用ファイルを変更した場合は、`CLAUDE.md` / `AGENTS.md` / `.claude/rules/` との
+  整合を確認する。
+
+### 3 系統の同期規約（Claude Code / Codex / Copilot）
+
+`.github/` は正本を持たず、共通資産を参照する入口。以下を必ず一致させる。
+
+- `.github/copilot-instructions.md` は `CLAUDE.md` / `AGENTS.md` / `.claude/rules/` と
+  矛盾させない。
+- `.github/prompts/` は `.claude/skills/`（正本）・`.agents/skills/` と目的・手順を
+  ズレさせない。
+- `.github/agents/` は `.claude/agents/` と職掌分離（generator だけが実装変更、
+  evaluator / security-reviewer / release-judge はコード修正禁止）をズレさせない。
+- **ReleaseJudge 専権・証跡ベース判定・未選択 profile 読込禁止・Docker 適用範囲**の 4 点は、
+  Claude Code / Codex / Copilot の 3 系統で必ず一致させる。
+
 ## 既存 `.claude/` とのマージ
 
 既存プロジェクトにすでに `.claude/` や `CLAUDE.md` がある場合の安全な適用順序:

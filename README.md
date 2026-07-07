@@ -47,6 +47,19 @@ SecurityReviewer → ReleaseJudge の開発フローを固定します。
   `.claude/profiles/`・`harness/contracts/`・`harness/evidence/` は
   **Claude Code / Codex の共通資産**であり、どちらのツールでも同じものを使います。
 
+## GitHub Copilot 対応
+
+Claude Code / Codex に加え、GitHub Copilot でも同じ方針で使えます。`.github/` 配下は
+Copilot 用の**入口・補助ファイル**であり、正本は増やしません（共通資産を参照するだけ）。
+
+- **Copilot 用の主指示**: `.github/copilot-instructions.md`。
+- **用途別指示**: `.github/instructions/`（harness / tdd / security / frontend / backend / infra）。
+- **手動実行プロンプト**: `.github/prompts/`（plan-feature / spec-to-tests / evaluator-review /
+  security-review / pre-deploy-security-check / final-operation-check / release-check）。
+- **VS Code / Copilot 用カスタムエージェント**: `.github/agents/`（planner / generator /
+  evaluator / security-reviewer / release-judge）。
+- 共通資産の**正本は `.claude/` と `CLAUDE.md` / `AGENTS.md`**。`.github/` はそれらを参照する。
+
 ## docs 索引
 
 - `docs/00_concept.md` — 思想と前提・制約
