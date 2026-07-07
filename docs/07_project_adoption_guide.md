@@ -71,7 +71,7 @@
   読まない（Read / Grep / Bash 経由を問わず）。
 - **Copilot には読込ガード hook が存在しない**（Claude Code / Codex の hook 相当の機構なし）。
   未選択 profile 読込禁止は指示（copilot-instructions / instructions）だけで担保されるため、
-  3 系統の中で防御レベルが低いことを認識して運用する。
+  hook を持つ系統（Claude Code / Codex）より防御レベルが低いことを認識して運用する。
 - `.github/agents/*.agent.md` の `tools` 名は Copilot のサーフェス（VS Code チャット /
   coding agent）とバージョンで異なる場合がある。動かないときは利用環境のツール一覧に
   合わせて調整する（職掌分離 = generator のみ編集可、は維持する）。

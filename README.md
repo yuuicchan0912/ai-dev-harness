@@ -36,7 +36,7 @@ Gemini CLI 向けの共通開発ハーネスです。ハーネス設計・ルー
 
 ## Codex 対応
 
-このハーネスは Claude Code と Codex の両方で使えます。主指示は入口として並列です:
+このハーネスの主指示は入口として並列です:
 **Claude Code = ルートの `CLAUDE.md` / Codex = ルートの `AGENTS.md`**。
 
 - **Claude Code の主指示**: リポジトリルートの `CLAUDE.md`

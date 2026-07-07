@@ -104,6 +104,28 @@ function isInsideProfiles(rel) {
 }
 
 function main() {
+  // CLI mode (parity with .codex/hooks): `node guard-active-profile-read.js <path>`
+  // -> exit 0 = allow, exit 2 = deny (reason on stderr). Lets the guard be
+  // smoke-tested without crafting a stdin event.
+  const argPath = process.argv[2];
+  if (argPath) {
+    const cliRoot = projectDir();
+    const cliRel = toRepoRelative(cliRoot, argPath);
+    if (!isInsideProfiles(cliRel)) process.exit(0);
+    const cliAllowed = parseAllowedProfiles(cliRoot);
+    if (
+      cliAllowed !== null &&
+      cliRel.toLowerCase().endsWith('.md') &&
+      cliAllowed.has(cliRel.toLowerCase())
+    ) {
+      process.exit(0);
+    }
+    process.stderr.write(
+      `Blocked: "${cliRel}" is not the active profile (see .claude/active-profile.md).\n`
+    );
+    process.exit(2);
+  }
+
   const raw = readStdin();
   let event;
   try {
