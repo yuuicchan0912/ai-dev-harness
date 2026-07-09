@@ -10,7 +10,9 @@
 3. `.claude/project-profile.md`（プロジェクト固有情報の唯一の置き場）
 4. `.claude/rules/`
 5. `.claude/active-profile.md` で指定された profile **のみ**
-   （frontend / backend / infra / docker / testing）
+   （frontend / ui / backend / infra / docker / testing）
+   UI ライブラリは `ui_profile:` で選択する（デフォルト shadcn/ui、MUI は明示切替。
+   同時採用は原則禁止）。読み込むのは `ui_profile:` が指す 1 ファイルのみ。
 
 `.claude/profiles/` 配下で active-profile.md に列挙されていないファイルを
 **Read も Grep もしてはならず、内容を会話・実装に反映してはならない**。

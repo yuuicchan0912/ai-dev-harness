@@ -9,8 +9,9 @@ Gemini CLI 向けの共通開発ハーネスです。ハーネス設計・ルー
 
 - **active-profile 方式**: 有効な技術構成を `.claude/active-profile.md` の参照先だけで指定。
   未選択 profile は PreToolUse hook で読込ブロック。
-- **技術切替**: フロントは Next.js 標準、バックエンドは Django / Go / Node.js / Laravel /
-  Rails、インフラは AWS / GCP / Vercel+Supabase をポインタ書き換えで切替。
+- **技術切替**: フロントは Next.js 標準、UI ライブラリは shadcn/ui（デフォルト）/ MUI、
+  バックエンドは Django / Go / Node.js / Laravel / Rails、インフラは AWS / GCP / Vercel+Supabase を
+  ポインタ書き換えで切替。
 - **Docker 必須**: ローカル開発・テスト・CI テストジョブは Docker。デプロイランタイムは
   infra_profile に従う。
 - **TDD 前提**: 契約 → RED → GREEN → REFACTOR → 評価 → 修正の状態遷移。
@@ -28,9 +29,12 @@ Gemini CLI 向けの共通開発ハーネスです。ハーネス設計・ルー
 1. `CLAUDE.md` `.claude/` `templates/` `docs/` `harness/` を対象リポジトリへコピーする
    （既存 `.claude/` や `CLAUDE.md` がある場合は上書きせずマージ。
    `docs/07_project_adoption_guide.md` 参照）。
-2. `templates/active-profile.md` を `.claude/active-profile.md` に置き、5 つのポインタを選ぶ
-   （雛形のデフォルトは `django + aws`。異なるスタックでは該当する `*_profile:` 行を
-   書き換え、`docs/08` の互換マトリクスを確認する）。
+2. `templates/active-profile.md` を `.claude/active-profile.md` に置き、6 つのポインタを選ぶ
+   （雛形のデフォルトは `nextjs + shadcn/ui + django + aws`。UI ライブラリは `ui_profile:` で
+   選択し、初期対応は shadcn/ui と MUI、デフォルトは shadcn/ui。MUI を使う場合のみ
+   `ui_profile:` を `.claude/profiles/ui/mui.md` に書き換える。shadcn/ui と MUI の同時採用は
+   原則禁止。異なるスタックでは該当する `*_profile:` 行を書き換え、`docs/08` の互換マトリクスを
+   確認する）。
 3. `templates/project-profile.md` を `.claude/project-profile.md` にコピーして固有情報を記入。
 4. `docs/08_profile_switching.md` の互換マトリクスで backend×infra が supported か確認する。
 5. docker compose 構成を確認（無ければ最初の契約として作成）。

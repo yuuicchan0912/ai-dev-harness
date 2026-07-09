@@ -12,9 +12,16 @@
    ルートへコピーする。**既存 `.claude/` や `CLAUDE.md` がある場合は無条件コピーで
    上書きしない**（下記「既存 `.claude/` とのマージ」に従う）。
 2. **active-profile 選択**: `templates/active-profile.md` を `.claude/active-profile.md` に置き、
-   frontend / backend / infra / docker / testing の 5 ポインタを 1 つずつ選ぶ。
-   **雛形のデフォルト構成は `django + aws`**。異なるスタック（例: Node.js + Vercel+Supabase）で
-   使う場合は該当する `*_profile:` 行を書き換え、切替後に `docs/08` の互換マトリクスを確認する。
+   frontend / ui / backend / infra / docker / testing の 6 ポインタを 1 つずつ選ぶ。
+   **雛形のデフォルト構成は `nextjs + shadcn/ui + django + aws`**。異なるスタック
+   （例: Node.js + Vercel+Supabase）で使う場合は該当する `*_profile:` 行を書き換え、切替後に
+   `docs/08` の互換マトリクスを確認する。
+   - **`ui_profile:` を確認する**: UI ライブラリはデフォルト shadcn/ui。MUI を使う場合のみ
+     `ui_profile:` を `.claude/profiles/ui/mui.md` へ変更する。shadcn/ui と MUI の同時採用は
+     原則禁止（必要なら hybrid profile を別途用意する）。UI profile の `前提frontend_profile` が
+     現在の `frontend_profile` と一致することを確認する。
+   - **既存プロジェクトに既に UI ライブラリがある場合は上書きせず**、既存構成と選択した
+     `ui_profile` の方針をマージする（既存コンポーネント・theme・依存を活かす）。
 3. **project-profile 記入**: `templates/project-profile.md` を `.claude/project-profile.md` に
    コピーし、プロダクト概要・ドメイン用語・環境変数名・リポジトリ規約を記入する。
 4. **互換確認**: `docs/08_profile_switching.md` の互換マトリクスで backend×infra が supported か
@@ -28,6 +35,8 @@
 7. **hook 有効化確認**: `.claude/settings.json` の PreToolUse hook が読み込まれることを確認する。
 8. **スモーク**: Claude Code / Codex では「有効な profile 構成を報告せよ」と聞き、未選択
    profile が混ざらないこと、hook が未選択 profile の Read をブロックすることを確認する。
+   このとき、選択中の `ui_profile`（デフォルト shadcn/ui）だけが参照され、未選択 UI profile
+   （例: MUI を選んでいなければ `mui.md`）に言及しないことも確認する。
    Copilot / Gemini CLI など hook のない系統では、各ツールの主指示を読ませたうえで
    「有効な profile 構成を報告せよ」と依頼し、未選択 profile に言及しないことを確認する
    （機械的な読込防止 hook がないため、行動規約ベースの確認になる）。

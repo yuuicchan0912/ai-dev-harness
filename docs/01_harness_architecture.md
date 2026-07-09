@@ -6,9 +6,11 @@
 2. `.claude/active-profile.md`
 3. `.claude/project-profile.md`
 4. `.claude/rules/`
-5. `.claude/active-profile.md` で指定された profile のみ（frontend / backend / infra / docker / testing）
+5. `.claude/active-profile.md` で指定された profile のみ（frontend / ui / backend / infra / docker / testing）
 
 `rules/00-reading-order.md` が正本。未選択 profile の読込は PreToolUse hook で禁止。
+UI ライブラリは `ui_profile:` で選択する（デフォルト shadcn/ui、MUI は明示切替）。読み込むのは
+`ui_profile:` が指す 1 ファイルのみで、未選択 UI profile は読まない。
 
 ## 各層の責務
 

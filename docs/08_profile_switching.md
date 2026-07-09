@@ -8,11 +8,27 @@
 
 ## 切替手順
 
-1. active-profile.md の `backend_profile` / `infra_profile` の参照先を変更する。
+1. active-profile.md の `backend_profile` / `infra_profile` / `ui_profile` の参照先を変更する。
 2. 下の互換マトリクスで組合せが `supported` か確認する。
 3. docker compose 構成が新スタックに対応しているか確認する。
 4. スモークテスト（コンテナ起動 + テスト 1 本）を実行する。
 5. `.claude/project-profile.md` の依存記述（環境変数名など）を更新する。
+
+## ui_profile の切替（shadcn/ui ⇄ MUI）
+
+- 切替対象に `ui_profile` を含む。デフォルト UI profile は shadcn/ui。
+- MUI を使う場合は `ui_profile:` を `.claude/profiles/ui/mui.md` へ変更する。
+  shadcn/ui に戻す場合は `.claude/profiles/ui/shadcn.md` へ変更する。
+- **shadcn→MUI / MUI→shadcn の切替は単純な行置換だけで済むとは限らない。**
+  既存コンポーネント・theme・CSS・依存関係・テストを確認し、移行が必要な範囲を洗い出す。
+- 切替時は feature-contract を作り、UI ライブラリ移行作業として扱う（その場で置換しない）。
+- 同一 feature 内で shadcn/ui と MUI を混在させない（同時採用は原則禁止。必要なら
+  hybrid profile を別途用意する）。
+- `ui_profile` 切替時は、切替先 UI profile の `前提frontend_profile` が現在の
+  `frontend_profile` と一致することを確認する。不一致なら `blocked` にして人間へ
+  エスカレーションする。
+- 切替後はコンテナ起動と UI テスト 1 本以上のスモークを行い、選択中 `ui_profile` だけが
+  参照されることを確認する。
 
 ## backend × infra 互換マトリクス
 

@@ -6,6 +6,7 @@
 
 ```yaml
 frontend_profile: .claude/profiles/frontend/nextjs.md
+ui_profile: .claude/profiles/ui/shadcn.md
 backend_profile: .claude/profiles/backend/django.md
 infra_profile: .claude/profiles/infra/aws.md
 docker_profile: .claude/profiles/docker/docker-required.md
@@ -17,6 +18,13 @@ testing_profile: .claude/profiles/testing/tdd-required.md
 > 有効化するときは、上の YAML の `*_profile:` 行の参照先だけを書き換える。
 > コメントアウト切替は禁止（候補を複数行残さない）。
 > ここではファイル名だけを挙げる。フルパスを書くと hook の許可リスト誤抽出の原因になる。
+
+ui_profile の候補（`.claude/profiles/ui/` 配下）:
+- `shadcn.md`
+- `mui.md`
+
+> デフォルトは shadcn.md。MUI を使う場合のみ `ui_profile:` を mui.md へ書き換える。
+> shadcn と MUI の同時採用は原則禁止（必要なら hybrid profile を別途用意）。
 
 backend_profile の候補（`.claude/profiles/backend/` 配下）:
 - `node.md`
