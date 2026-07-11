@@ -25,6 +25,8 @@ Planner → Generator → Evaluator → SecurityReviewer → ReleaseJudge。
 各段の責務・ツール権限・禁止事項は `.claude/agents/` の subagent 定義に従う。
 判断に迷ったら実装せず Planner に戻る。仕様変更はその場で直さず契約（feature-contract）を
 更新してから進む。
+外部ループ（Claude Code の `/loop` から `/outer-loop` を反復実行。1 反復 = 最大 1 feature）は
+`.claude/rules/10-loop-protocol.md` の外部ループ節と `docs/09_external_loop.md` に従う。
 
 ## 3. TDD 必須
 

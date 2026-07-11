@@ -4,3 +4,7 @@
 
 # ローカル個人設定はコミットしない
 .claude/settings.local.json
+
+# 外部ループのローカル可変状態はコミットしない（.gitkeep のみ追跡。docs/09）
+harness/state/*
+!harness/state/.gitkeep

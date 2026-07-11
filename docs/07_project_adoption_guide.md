@@ -70,6 +70,7 @@
 
 - Codex 用 skills は `.agents/skills/` に置く。`.agents/skills/` は `.claude/skills/` の
   **複製**として扱い、正本は `.claude/skills/` とする。
+- 外部ループ用 skill（`outer-loop` / `feature-cycle`）も同期対象に含める（計 13 skill）。
 - `.claude/skills/` を変更した場合は、必ず `.agents/skills/` へ同内容を反映する。
   `.agents/skills/` を変更した場合も、必ず `.claude/skills/` へ同内容を反映する。
 - 適用前またはコミット前に、以下で同期確認する。差分がある場合は、意図した差分でない限り
@@ -118,6 +119,10 @@
   evaluator / security-reviewer / release-judge はコード修正禁止）をズレさせない。
 - **ReleaseJudge 専権・証跡ベース判定・未選択 profile 読込禁止・Docker 適用範囲**の 4 点は、
   Claude Code / Codex / Copilot / Gemini CLI の全系統で必ず一致させる。
+- 外部ループ用 skill（`outer-loop` / `feature-cycle`）は **Claude Code / Codex のみ**に置く。
+  `.github/prompts/` / `.gemini/commands/` には追加しない（自動反復は Claude Code の
+  `/loop` 固有機能。`docs/09_external_loop.md`）。この 2 skill が無いことは
+  `.github/prompts/` / `.gemini/commands/` と `.claude/skills/` の「ズレ」に該当しない。
 
 ## Gemini CLI を使う場合
 
@@ -159,6 +164,9 @@ active-profile / project-profile を記入**。
   統合し、`.claude/CLAUDE.md` は削除して重複させない（両方に実体を残すと二重に
   読み込まれ、矛盾の温床になる）。
 - 既存 hooks がある場合は、hook の実行順序と責務を確認する。
+- 既存の `.claude/loop.md` がある場合は上書きせず統合する（本ハーネスの `loop.md` は
+  `/outer-loop` へのポインタのみで手順を書かない。既存 loop.md の用途と両立させるか、
+  どちらを bare `/loop` の既定にするか人間が判断する）。
 - 既存 `.claude/agents/` や `.claude/skills/` がある場合は、同名ファイルの上書き前に
   差分確認する。
 

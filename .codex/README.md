@@ -8,7 +8,7 @@ Codex 側の入口設定を置くディレクトリ。
 ## 構成
 
 - **主指示はリポジトリルートの `AGENTS.md`**。Codex はまずこれを読む。
-- **Codex 用 skills は `.agents/skills/`**（`.claude/skills/` と同等の 11 skill）。
+- **Codex 用 skills は `.agents/skills/`**（`.claude/skills/` と同等の 13 skill）。
   `.agents/skills/` は `.claude/skills/` の**複製**として管理し、**正本は `.claude/skills/`**。
   両者を乖離させない。更新時は `diff -r .claude/skills .agents/skills` で一致確認する。
 - 以下は **Claude Code / Codex の共通資産**であり、どちらのツールでも同じものを使う:

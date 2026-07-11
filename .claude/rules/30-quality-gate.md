@@ -36,10 +36,17 @@ harness/evidence/<feature-id>/
 ├── security-report.md
 ├── pre-deploy-security-check.md
 ├── final-operation-check.md
+├── failure-report.md（外部ループ失敗時のみ・任意）
 └── release-decision.md
 ```
 
 `release-decision.md` が存在しない限り completed は禁止（`rules/70-completed-policy.md` と対）。
+
+`failure-report.md` は外部ループ（`docs/09_external_loop.md`）で **feature-id 確定後に
+失敗した場合のみ**作成する任意証跡（必須証跡ではない）。blocked 時に自動 commit せず、
+branch 上の未コミット変更として残す（failure-report 単独の自動 commit は禁止。
+`rules/10` の外部ループ節）。secret は必ずマスクする。後に completed へ到達した場合、
+必要に応じて最終 commit へ含める。
 
 複数 feature を束ねてデプロイする場合は `harness/evidence/release/<release-id>/` に
 ci-status / final-operation-check / release-decision を置き、構成 feature の evidence

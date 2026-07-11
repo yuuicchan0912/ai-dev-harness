@@ -34,6 +34,7 @@ rules/*  ← すべての agent / skill が従う共通ルール
 agents/* ← 各段の責務・ツール権限・禁止事項
 skills/* ← agent が使う手順（profile を見出し参照）
 harness/evidence/<feature-id>/ ← 全工程の証跡の置き場
+harness/state/loop-state.md ← 外部ループのローカル可変状態（コミットしない。docs/09）
 ```
 
 ## ツール権限による強制

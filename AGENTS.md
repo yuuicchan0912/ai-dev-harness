@@ -58,7 +58,10 @@ Gemini CLI）で使える共通開発ハーネス**です。
 
 ## 6. Codex 用 skills
 
-- Codex で使う skills は `.agents/skills/` に置かれている（11 skill。
+- Codex で使う skills は `.agents/skills/` に置かれている（13 skill。
   `.claude/skills/` と同等の内容）。
+- 外部ループ用 skill（`outer-loop` / `feature-cycle`）は、Codex では自動反復せず
+  **1 反復ずつ手動で実行**する（自動反復は Claude Code の `/loop` 固有機能。
+  `docs/09_external_loop.md`）。
 - skill には技術固有コマンドを直接書かない。必ず `.claude/active-profile.md` で指定された
   profile の該当見出し（「テストコマンド」「依存監査コマンド」等）を参照する。

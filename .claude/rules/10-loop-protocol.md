@@ -38,3 +38,36 @@ contract → red → green → refactor → evaluate → security → judge → 
 - 秘密情報の取り扱いなど、人間の承認が必要な操作。
 
 blocked にしたら、理由・必要な判断・再開条件を明記して停止する。
+
+## 外部ループ（/outer-loop。1 反復 = 最大 1 feature）
+
+内部品質ループを反復実行する外部ループの規約。手順の正本は
+`.claude/skills/outer-loop/SKILL.md`、設計と Claude Code 固有事項は
+`docs/09_external_loop.md`。
+
+- 1 反復で処理する feature は最大 1 件。同一反復で次の feature へ進まない。
+- 外部ループの状態（idle / in-progress / blocked / stopped / done）は
+  `harness/state/loop-state.md` に固定形式で記録する（コミットしない。
+  形式は outer-loop skill / docs/09）。内部ループの状態一覧とは別物。
+- 事前確認は次の順序を厳守する:
+  1. `harness/state/loop-state.md` を最初に確認する。
+  2. in-progress が無い場合: worktree が dirty なら stop、clean なら新規選択へ。
+  3. in-progress がある場合: 現在 branch が loop-state の `branch:` と一致し、
+     merge conflict がなく、同じ feature の作業途中と確認できれば **dirty でも再開可**。
+  4. branch 不一致・merge conflict・由来不明の変更がある場合は stop。
+  5. in-progress がある間は新しい feature を選択しない。
+  6. stash / reset / checkout 等による自動退避・自動破棄は禁止。
+- 対象選択の正本は sprint-contract（`harness/contracts/sprint-<id>.md`）とし、
+  記載順で選ぶ。completed（release-decision.md）と blocked の feature は除外する。
+  対象がなければ done（正常終了）。
+- Git 操作:
+  - commit は release-decision.md が completed かつ blocker / high 以上の未解消
+    Security 指摘なしの場合のみ（実装・契約・証跡を同一 commit に含める）。
+  - push / PR は project-profile の `outer_loop.push_allowed` / `pr_allowed` が
+    true の場合のみ。PR 作成まで（merge しない）。
+  - merge / deploy / force-push / branch 削除は自動化しない。
+  - blocked 時は自動 commit しない（failure-report 単独の自動 commit も禁止。
+    未コミット変更は branch 上に残す）。
+- 再試行上限は本ファイルの「同一エラー 3 回」に一元化する（外部ループ用の
+  別上限を作らない）。
+- 契約の凍結（人間承認）と infra apply の承認は無人反復で代行しない。承認待ちは stop。

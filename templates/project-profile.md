@@ -26,6 +26,17 @@
 - レビュー規約: {{記入}}
 - ディレクトリ規約の補足: {{記入}}
 
+### 外部ループ設定（`docs/09_external_loop.md`。初期値のまま = 外部ループ無効）
+
+```yaml
+outer_loop:
+  enabled: false
+  backlog_source: sprint-contract
+  push_allowed: false
+  pr_allowed: false
+  branch_pattern: feature/<feature-id>
+```
+
 ## 有効な技術構成
 
 `.claude/active-profile.md` を参照（このファイルには複製しない）。
